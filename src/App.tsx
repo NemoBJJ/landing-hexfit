@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="app">
       <div className="container">
-        <h1>Cadastre-se para Treinos Personalizados</h1>
+        <h1>VALLE E HEBERT SÃO GAYS</h1>
         <p>Preencha seus dados abaixo e comece sua transformação!</p>
         
         <form onSubmit={handleSubmit} className="form">
