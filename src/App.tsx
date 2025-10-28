@@ -15,19 +15,50 @@ function App() {
     e.preventDefault();
     setIsLoading(true);
     
-    // SIMULA envio (depois conectamos com API)
-    setTimeout(() => {
-      setMessage('✅ Cadastro recebido! Em breve entraremos em contato.');
-      setForm({ firstname: '', lastname: '', email: '', sexe: '' });
+    try {
+      const response = await fetch('https://v2.hexfit.io/User/Create/Client', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.REACT_APP_HEXFIT_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstname: form.firstname,
+          lastname: form.lastname,
+          email: form.email,
+          sexe: form.sexe,
+          lang: 'PT-BR',
+          unit_system: 1
+        })
+      });
+
+      const result = await response.json();
+      
+      if (result.status === true) {
+        setMessage('✅ Cliente criado com sucesso na plataforma! Acesso liberado.');
+        setForm({ firstname: '', lastname: '', email: '', sexe: '' });
+      } else {
+        setMessage(`❌ Erro: ${result.value || 'Falha no cadastro'}`);
+      }
+    } catch (error) {
+      setMessage('❌ Erro de conexão com a plataforma');
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   return (
     <div className="app">
       <div className="container">
-        <h1>VALLE E HEBERT SÃO GAYS</h1>
-        <p>Preencha seus dados abaixo e comece sua transformação!</p>
+        {/* HEADING ATUALIZADO */}
+        <div className="header-title">
+          <h1>VALLE PERSONAL TRAINING</h1>
+          <div className="belt-badge">
+            <span>FAIXA BRANCA</span>
+          </div>
+        </div>
+        
+        <p className="subtitle">Preencha seus dados abaixo e comece sua transformação!</p>
         
         <form onSubmit={handleSubmit} className="form">
           <input
@@ -72,6 +103,7 @@ function App() {
           <p>🎯 Treinos 100% personalizados</p>
           <p>💪 Acompanhamento profissional</p>
           <p>📱 App exclusivo para alunos</p>
+          <p>⚡ Cadastro automático na plataforma</p>
         </div>
       </div>
     </div>
