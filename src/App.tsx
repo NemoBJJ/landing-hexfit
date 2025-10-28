@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -10,6 +10,31 @@ function App() {
   });
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // URLs das suas imagens
+  const carouselSlides = [
+    "/images/landingpage0.jpg",
+    "/images/landingpage1.jpg", 
+    "/images/landingpage2.jpg",
+    "/images/landingpage3.jpg"
+  ];
+
+  // Textos para cada imagem
+  const slideTexts = [
+    "🥋 Treino de Jiu-Jitsu Profissional",
+    "💪 Condicionamento Físico Completo", 
+    "🥊 Técnicas de Combate Avançadas",
+    "🎯 Metodologia Comprovada"
+  ];
+
+  // Auto-play do carrossel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [carouselSlides.length]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,13 +76,26 @@ function App() {
     <div className="app">
       <div className="container">
         <div className="header-title">
-          <h1>VALLE E HERBERTH HEXFIT</h1>
+          <h1>ELITE TRAINING</h1>
           <div className="belt-badge">
-            <span>JIU JITSU</span>
+            <span>JIU-JITSU & COMBAT FITNESS</span>
           </div>
         </div>
         
-        <p className="subtitle">Preencha seus dados abaixo e comece sua transformação!</p>
+        <p className="subtitle">
+          Na Elite Training já treinamos mais de 1.000 atletas, desde iniciantes 
+          até profissionais de elite. Preencha seus dados e comece sua transformação!
+        </p>
+
+        {/* CARROSSEL COM IMAGENS REAIS */}
+        <div className="carousel-container">
+          <div 
+            className="carousel-slide"
+            style={{ backgroundImage: `url(${carouselSlides[currentSlide]})` }}
+          >
+            <span>{slideTexts[currentSlide]}</span>
+          </div>
+        </div>
         
         <form onSubmit={handleSubmit} className="form">
           <input
@@ -92,7 +130,7 @@ function App() {
           </select>
           
           <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Cadastrando...' : 'Começar Agora'}
+            {isLoading ? 'Cadastrando...' : 'COMEÇAR TREINO GRATUITO'}
           </button>
         </form>
 
