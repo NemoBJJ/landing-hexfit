@@ -19,7 +19,7 @@ function App() {
       const response = await fetch('https://v2.hexfit.io/User/Create/Client', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${process.env.REACT_APP_HEXFIT_TOKEN}`,
+          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlmb3JtIjoxMjEwODgyLCJkcmFuZ28iOjMsInNhbHQiOiIwLjY1NTM0MjAwIDE3NjEzMTE5NDc5NTI4In0.kXRpXDkYIOYa4ejFs0A2FT9w-T29O9TAJjZrHuGRuA4',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -50,7 +50,6 @@ function App() {
   return (
     <div className="app">
       <div className="container">
-        {/* HEADING ATUALIZADO */}
         <div className="header-title">
           <h1>VALLE PERSONAL TRAINING</h1>
           <div className="belt-badge">
