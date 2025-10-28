@@ -51,9 +51,9 @@ function App() {
     <div className="app">
       <div className="container">
         <div className="header-title">
-          <h1>VALLE PERSONAL TRAINING</h1>
+          <h1>VALLE E HERBERTH HEXFIT</h1>
           <div className="belt-badge">
-            <span>FAIXA BRANCA</span>
+            <span>JIU JITSU</span>
           </div>
         </div>
         
